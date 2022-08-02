@@ -59,6 +59,11 @@ html, body{
     font-size: 17px;
     cursor: pointer;
 }
+#resetUpBtn{
+    padding: 5px 10px;
+    font-size: 17px;
+    cursor: pointer;
+}
 
 .game_area{
     margin-top:5px;

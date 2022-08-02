@@ -70,12 +70,24 @@ function gameStart(){
         giveUpBtn.innerText = 'Give up';
         giveUpBtn.addEventListener("click", function quitClick(event) {
             if(gameFin == 0){
-                notification.innerText = "Don't get salty.  Press Enter to try again";
+                notification.innerText = "Don't get salty.  Press Reset to try again";
                 gameOver();
             }
-        });
-    navBar.append(giveUpBtn);
+			});
+			
+		let resetUpBtn = document.createElement('button');
+        resetUpBtn.id = 'resetUpBtn';
+        resetUpBtn.innerText = 'Reset';
+        resetUpBtn.addEventListener("click", function quitClick(event) {
+            location.reload();
+			return false;
+			});	
+		
+	navBar.append(giveUpBtn);
+	navBar.append(resetUpBtn);
     container.append(navBar);
+	
+
 
     let gameArea = document.createElement('div');
     gameArea.className = 'game_area';
@@ -135,7 +147,11 @@ function gameStart(){
                 let wordRow = document.getElementsByClassName('row')[currentRow];
                 let rowBlockEl = wordRow.childNodes;
                 submitWord(wordRow);
-            }
+            }else {
+				enterKey.removeEventListener("click", enterClick, false);
+				document.removeEventListener('keyup', restart, false);
+				gameStart();
+			}
         });
         botKeys.append(enterKey);
         keyboard.append(botKeys);
@@ -221,7 +237,7 @@ function submitWord(wordRow, keyPress){
                 gameOverWin();
             }
             else if(currentRow == 5){
-                notification.innerText = "It's not 'algae'bra. Press Enter to try again";
+                notification.innerText = "It's not 'algae'bra. Press Reset to try again";
                 gameOver();
             }
             else{
